@@ -12,4 +12,11 @@ The `app.conf` exposes various services under the $SPATIAL_FQDN (currently `zoa.
 
 The zoatrack component needs to be configured with various system properties in `zoatrack.properties`
 
+## DNS config
+
+Please add this to /etc/resolvconf/resolv.conf.d/head
+
+		nameserver 172.17.0.1
+
+This will make the host running the composition of services aware of the dnsmasq component
 
