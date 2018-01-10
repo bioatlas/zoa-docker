@@ -9,9 +9,9 @@ build-war:
 	docker run -it --rm --name my-maven-project \
 		-v $(PWD)/oztrack:/usr/src/mymaven \
 		-v $(PWD)/m2:/root/.m2 \
-#		-v $(PWD)/settings-docker.xml:/root/.m2/settings.xml \
 		-w /usr/src/mymaven \
 		maven:3 bash -c "mvn package"
+#		-v $(PWD)/settings-docker.xml:/root/.m2/settings.xml \
 
 build-image:
-	docker build -t bioatlas/zoatrack .
+	docker build -t bioatlas/zoatrack:latest .
