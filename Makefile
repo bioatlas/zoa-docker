@@ -1,20 +1,5 @@
 #!make
 
--include .env
-
-DOCKER_SLUG = bioatlas/zoa
-ZOA_URL = https://github.com/AtlasOfLivingAustralia/oztrack
-ZOA_VERSION = 2.0
-VERSION = $(TRAVIS_BUILD_ID)
-
-ME = $(USER)
-
-MVN := maven:3.3.9-jdk-8
-TS := $(shell date '+%Y_%m_%d_%H_%M')
-PWD := $(shell pwd)
-USR := $(shell id -u)
-GRP := $(shell id -g)
-
 all: init build up
 .PHONY: all
 
@@ -30,42 +15,32 @@ init:
 clean:
 	rm -f ws/wait-for-it.sh 
 
-build: build-ws build-rserve
+build: 
 
-build-ws:
 	@echo "Building zoatrack image..."
-	@docker build -t $(DOCKER_SLUG):$(ZOA_VERSION) ws \
-		--build-arg ZOAVERSION=$(ZOA_VERSION)
+	make -C ws
 
-build-rserve:
 	@echo "Building rserve image..."
 	make -C rserve
 		
 up:
-	@echo "Starting services..."
-	set -a && . $(PWD)/.env && docker-compose up -d
+	docker-compose up -d
 
 down:
-	@echo "Stopping services..."
+	@echo "Removing services..."
 	@docker-compose down
-
-connect-db:
-	@docker-compose run postgis \
-		psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
-
-backup-db:
-	docker exec -it db \
-		bash -c "pg_dump -U $(POSTGRES_USER) -d $(POSTGRES_DB) > /tmp/zoa.sql"
 
 test:
 	@echo "Will open the services locally in the browser if you have dnsmasq setup"
-	@xdg-open http://$(SPATIAL_FQDN)
+	@xdg-open https://zoa.bioatlas.se
 
 rm: stop
 	@echo "Removing containers and persisted data"
 	docker-compose rm -vf
 
 push:
-	@docker push $(DOCKER_SLUG):$(ZOA_VERSION)
+	@docker push bioatlas/zoatrack:latest
+	@docker push bioatlas/rserve:latest
 
 release: build push
+
