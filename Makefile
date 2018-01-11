@@ -15,14 +15,10 @@ init:
 clean:
 	rm -f ws/wait-for-it.sh 
 
-build: 
-
-	@echo "Building zoatrack image..."
-	make -C ws
-
-	@echo "Building rserve image..."
+build:
+	cd ws && make
 	make -C rserve
-		
+
 up:
 	docker-compose up -d
 

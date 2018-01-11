@@ -3,7 +3,8 @@
 all: init build
 
 init:
-	git clone --depth=1 https://github.com/AtlasOfLivingAustralia/oztrack.git
+	@test -d oztrack || \
+		git clone --depth=1 https://github.com/AtlasOfLivingAustralia/oztrack.git
 
 build: build-war build-image
 
@@ -14,5 +15,6 @@ build-war:
 		-w /usr/src/mymaven \
 		maven:3 bash -c "mvn package"
 #		-v $(PWD)/settings-docker.xml:/root/.m2/settings.xml \
+
 build-image:
 	docker build -t bioatlas/zoatrack:latest .

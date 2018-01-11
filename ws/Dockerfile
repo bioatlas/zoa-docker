@@ -1,4 +1,4 @@
-FROM tomcat:8-alpine
+FROM tomcat:9-jre8-alpine
 
 COPY oztrack/target/oztrack.war $CATALINA_HOME/webapps/oztrack.war
 
