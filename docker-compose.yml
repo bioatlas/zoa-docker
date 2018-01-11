@@ -53,6 +53,9 @@ services:
     volumes:
       - vol_geoserver:/opt/geoserver/data_dir
 
+  rserve:
+    image: bioatlas/rserve:latest
+
   zoatrack:
     image: bioatlas/zoatrack:latest
     volumes:
@@ -64,3 +67,5 @@ services:
     depends_on:
       - geoserver
       - postgis
+      - rserve
+

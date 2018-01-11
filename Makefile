@@ -30,12 +30,16 @@ init:
 clean:
 	rm -f ws/wait-for-it.sh 
 
-build: build-ws
+build: build-ws build-rserve
 
 build-ws:
-	@echo "Building ws image..."
+	@echo "Building zoatrack image..."
 	@docker build -t $(DOCKER_SLUG):$(ZOA_VERSION) ws \
 		--build-arg ZOAVERSION=$(ZOA_VERSION)
+
+build-rserve:
+	@echo "Building rserve image..."
+	make -C rserve
 		
 up:
 	@echo "Starting services..."
@@ -51,7 +55,7 @@ connect-db:
 
 backup-db:
 	docker exec -it db \
-		bash -c "pg_dump -U $(POSTGRES_USER) -d $(POSTGRES_DB) > /tmp/clb.sql"
+		bash -c "pg_dump -U $(POSTGRES_USER) -d $(POSTGRES_DB) > /tmp/zoa.sql"
 
 test:
 	@echo "Will open the services locally in the browser if you have dnsmasq setup"
