@@ -1,3 +1,5 @@
+#! make
+
 all: init build
 
 init:
@@ -12,6 +14,5 @@ build-war:
 		-w /usr/src/mymaven \
 		maven:3 bash -c "mvn package"
 #		-v $(PWD)/settings-docker.xml:/root/.m2/settings.xml \
-
 build-image:
 	docker build -t bioatlas/zoatrack:latest .
