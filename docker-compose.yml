@@ -47,7 +47,7 @@ services:
     volumes:
       - vol_postgis:/var/lib/postgresql/data
       - ./pg_hba.conf:/etc/postgresql
-      - ./init-db.sh:/docker-entrypoint-initdb.d/x-init-db.sh
+      - ./x-init-db.sh:/docker-entrypoint-initdb.d/x-init-db.sh
 
   geoserver:
     image: kartoza/geoserver:2.8.0
