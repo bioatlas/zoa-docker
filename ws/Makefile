@@ -4,7 +4,7 @@ all: init build
 
 init:
 	@test -d oztrack || \
-		git clone --depth=1 https://github.com/AtlasOfLivingAustralia/oztrack.git
+		git clone --depth=1 https://github.com/bioatlas/oztrack.git
 
 build: build-war build-image
 
