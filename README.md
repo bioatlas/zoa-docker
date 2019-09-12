@@ -22,6 +22,8 @@ For variations of how to do this on MacOS and other platforms, please search the
 
 For setting up SSL, see instructions at <https://github.com/dina-web/proxy-docker/tree/self-signed-certs#certificates-and-setting-up-ssl>
 
+You may need to edit `docker-compose.yml` with your own domain name in the parameter `VIRTUAL_HOST`
+
 ## Usage
 
 The `docker-compose.yml` file defines the various components of the system.
