@@ -5,6 +5,9 @@ all: init build
 init:
 	@test -d oztrack || \
 		git clone --depth=1 https://github.com/bioatlas/oztrack.git
+		# argos library missing, manuel import
+		mkdir -p oztrack/target/classes/
+		wsimport -extension http://ws-argos.clsamerica.com/argosDws/services/DixService?wsdl -d oztrack/target/classes/
 
 build: build-war build-image
 
