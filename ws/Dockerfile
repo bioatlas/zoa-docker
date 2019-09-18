@@ -1,6 +1,9 @@
 FROM tomcat:9-jre8-alpine
 
-COPY oztrack/target/oztrack.war $CATALINA_HOME/webapps/oztrack.war
+#COPY oztrack/target/oztrack.war $CATALINA_HOME/webapps/oztrack.war
+# deploy zoatrack as ROOT.war to access it directly at /
+RUN rm -Rf $CATALINA_HOME/webapps/ROOT/
+COPY oztrack/target/oztrack.war $CATALINA_HOME/webapps/ROOT.war
 
 RUN apk add --update tini openssl bash
 
