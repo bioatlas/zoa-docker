@@ -15,6 +15,7 @@ RUN R -e 'install.packages("spacetime", repos = "http://cran.csiro.au/")'
 
 COPY kftrack_0.70-x64.tar.gz /tmp/kftrack_0.70-x64.tar.gz
 COPY ukfsst_0.3-x64.tar.gz /tmp/ukfsst_0.3-x64.tar.gz
+COPY Grid2Polygons_0.1.6.tar.gz /tmp/Grid2Polygons_0.1.6.tar.gz
 
 RUN R -e 'install.packages("/tmp/kftrack_0.70-x64.tar.gz", repos = NULL)'
 
@@ -22,6 +23,8 @@ RUN R -e 'install.packages("date", repos = "http://cran.csiro.au/")'
 RUN R -e 'install.packages("ncdf", repos = "http://cran.csiro.au/")'
 
 RUN R -e 'install.packages("/tmp/ukfsst_0.3-x64.tar.gz", repos = NULL)'
+
+RUN R -e 'install.packages("/tmp/Grid2Polygons_0.1.6.tar.gz", repos = NULL)'
 
 RUN R -e 'devtools::install_github("trestletech/plumber")'
 
